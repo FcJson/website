@@ -1,0 +1,186 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}lost & found{% endblock %}</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/static/laf/img/favicon%20.png">
+
+    <!-- CSS
+        ============================================ -->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/laf/css/bootstrap.min.css">
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="/static/laf/css/fontawesome.css">
+    <!-- Flaticon -->
+    <link rel="stylesheet" href="/static/laf/css/flaticon.css">
+    <!-- optico Icons -->
+    <link rel="stylesheet" href="/static/laf/css/optico-icons.css">
+    <!-- Themify Icons -->
+    <link rel="stylesheet" href="/static/laf/css/themify-icons.css">
+    <!-- Slick -->
+    <link rel="stylesheet" href="/static/laf/css/slick.css">
+    <!-- Slick Theme -->
+    <link rel="stylesheet" href="/static/laf/css/slick-theme.css">
+    <!-- Pretty Photo -->
+    <link rel="stylesheet" href="/static/laf/css/prettyPhoto.css">
+    <!-- Twentytwenty -->
+    <link rel="stylesheet" href="/static/laf/css/twentytwenty.css">
+    <!-- Shortcode CSS -->
+    <link rel="stylesheet" href="/static/laf/css/shortcode.css">
+    <!-- Base CSS -->
+    <link rel="stylesheet" href="/static/laf/css/base.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="/static/laf/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="/static/laf/css/responsive.css">
+
+    {% block css %}{% endblock %}
+</head>
+
+
+<body>
+
+<!-- page wrapper -->
+    <div class="page-wrapper">
+
+        <!-- Header Main Area -->
+        <header class="site-header header-style-1">
+            <div class="site-header-menu">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex align-items-center">
+                                <div class="site-branding flex-grow-1">
+                                    <img class="logo-img" alt="laf" src="/static/laf/img/icon.png">
+                                </div>
+                                <div class="site-navigation ml-auto">
+                                    <nav class="main-menu navbar-expand-xl navbar-light">
+                                        <div class="navbar-header">
+                                            <!-- Togg le Button -->
+                                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                                <span class="fa fa-bars"></span>
+                                            </button>
+                                        </div>
+                                        <div class="collapse navbar-collapse clearfix" id="navbarSupportedContent">
+                                            <ul class="navigation clearfix">
+                                                <li><a href="/home/">主页</a></li>
+                                                <li><a href="/lost/">失物</a></li>
+                                                <li><a href="/found/">招领</a></li>
+
+                                                {% block nav %}
+
+                                                {% endblock %}
+
+                                            </ul>
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Header Main Area End Here -->
+
+        <div>
+            {% block content %}
+            {% endblock %}
+        </div>
+
+           <!-- footer -->
+    <footer class="footer site-footer">
+        <div class="footer-top skin-bg-color">
+            <div class="container">
+                <div class="row d-flex white-color align-items-center">
+                    <div class="col-lg-8">
+                        <div class="iconbox iconbox-style-6">
+                            <div class="iconbox-inner d-flex">
+                                <div class="iconbox-contents">
+                                    <div class="iconbox-title">
+                                            <h2>本站是一个公益平台<br><strong>绝对不会以任何理由收取用户的费用，如果用户自愿支付报酬，与我们没有任何关系！谢谢。</strong>
+                                            </h2>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="footerlogo mb-4">
+                        <img class="" src="/static/laf/img/footer.jpg" alt="">
+                    </div>
+                    <p class="mb-0">我们致力于解决失物招领问题，尽最大可能使每一位失主尽快的找到失物，同时也为拾物不昧的热心群众提供了一个平台献出他们的爱心。</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 mt-sm-30">
+                    <h6 class="footer-widget-title">服务</h6>
+                    <ul>
+                        <li><a style="text-decoration: underline" href="/lost/">失物</a></li>
+                        <li><a style="text-decoration: underline" href="/found/">招领</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 address-box mt-md-30">
+                    <h6 class="footer-widget-title">联系我们</h6>
+                    <div class="d-flex">
+                        <p>地址:</p>
+                        <p>&nbsp;江苏-南京</p>
+                    </div>
+                    <div class="d-flex">
+                        <p>电话:</p>
+                        <p>&nbsp;(+01) 123 456 7890</p>
+                    </div>
+                    <div class="d-flex">
+                        <p>邮箱:</p>
+                        <p>&nbsp;123@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer End -->
+
+    </div>
+    <!-- page wrapper End -->
+
+
+    <!-- JS
+        ============================================ -->
+
+    <!-- jQuery JS -->
+    <script src="/static/laf/js/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="/static/laf/js/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="/static/laf/js/bootstrap.min.js"></script>
+    <!-- jquery Waypoints JS -->
+    <script src="/static/laf/js/jquery-waypoints.js"></script>
+    <!-- jquery Appear JS -->
+    <script src="/static/laf/js/jquery.appear.js"></script>
+    <!-- Numinate JS -->
+    <script src="/static/laf/js/numinate.min.js"></script>
+    <!-- Slick JS -->
+    <script src="/static/laf/js/slick.min.js"></script>
+    <!-- PrettyPhoto JS -->
+    <script src="/static/laf/js/jquery.prettyPhoto.js"></script>
+    <!-- Circle Progress JS -->
+    <script src="/static/laf/js/circle-progress.js"></script>
+    <!-- Event Move JS -->
+    <script src="/static/laf/js/jquery.event.move.js"></script>
+    <!-- Twentytwenty JS -->
+    <script src="/static/laf/js/jquery.twentytwenty.js"></script>
+    <!-- Scripts JS -->
+    <script src="/static/laf/js/scripts.js"></script>
+</body>
+</html>

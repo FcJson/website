@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}主页{% endblock %}
+
+{% block nav %}
+    {% include 'nav.html' %}
+{% endblock %}
+
+{% block content %}
+<div style="text-align: center">
+    <img height="400" src="/static/laf/img/home.jpg" alt="">
+    <br><br>
+    <hr>
+    <p><strong>尊重他人的财产是我们每个人的职责。只要人人都献出一点爱，世界将成为美好的人间。</strong></p>
+</div>
+
+<hr>
+
+<script>
+    {% if messages %}
+        {% for msg in messages %}
+            alert('{{ msg.message }}')
+        {% endfor %}
+    {% endif %}
+</script>
+
+{% endblock %}

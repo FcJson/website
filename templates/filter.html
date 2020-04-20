@@ -1,0 +1,61 @@
+<!-- 本页面为lost.html和found.html共有的筛选信息表单 -->
+<div class="row">
+    <div class="col">
+        物品类别:
+        <select name="category">
+            {% if categories %}
+                {% for category in categories %}
+                    <option value="{{ category }}">{{ category }}</option>
+                {% endfor %}
+            {% endif %}
+        </select>
+        <p>{{ errors.category }}</p>
+    </div>
+    <div class="col">
+        省份:
+        <select name="province" id="province">
+            {% if provinces %}
+                {% for province in provinces %}
+                    <option value="{{ province }}">{{ province }}</option>
+                {% endfor %}
+            {% endif %}
+        </select>
+        <p>{{ errors.province}}</p>
+    </div>
+    <div class="col">
+        城市:
+        <select name="city" id="city">
+            {% if cities %}
+                {% for city in cities %}
+                    <option value="{{ city }}">{{ city }}</option>
+                {% endfor %}
+            {% endif %}
+        </select>
+        <p>{{ errors.city }}</p>
+    </div>
+        <div class="col">
+            <input type="submit" value="快速筛选">
+        </div>
+    </div>
+
+<script src="/static/laf/js/jquery.min.js"></script>
+<!--实现省市联动-->
+    <script>
+        $('#province').change(function(){
+            var province = $("#province").find("option:selected").text();
+            $('#city').empty();
+            $.ajax({
+                url: "/province/city/",
+                type: "post",
+                async: true,
+                "Content-Type": "application/json",
+                headers: {'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()},
+                data: {'province': province.toString()},
+                success: function (response) {
+                    $.each(response, function (key, value) {
+                        $("#city").append("<option value="+value+">"+value+"</option>");
+                    })
+                }
+            });
+        });
+    </script>

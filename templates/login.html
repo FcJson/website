@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}登录{% endblock %}
+
+
+{% block css %}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="/static/laf/css/login_bootstrap.min.css">
+
+<!-- Loding font -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,700" rel="stylesheet">
+
+<!-- Custom Styles -->
+<link rel="stylesheet" type="text/css" href="/static/laf/css/login_styles.css">
+{% endblock %}
+
+{% block nav %}
+    {% include 'nav.html' %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container" id="login">
+    <div class="row justify-content-center">
+	<div class="col-lg-8">
+        <div class="login">
+
+            <h2>登录</h2>
+		<!-- Loging form -->
+            <form action="/accounts/login/" method="post">
+                {% csrf_token %}
+				<div class="form-group">
+                    <input type="text" class="form-control" name="username" placeholder="用户名">
+                    <p class="errors">{{ errors.username }}</p>
+				</div>
+				<div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="密码">
+                    <p class="errors">{{ errors.password }}</p>
+				</div>
+
+                <div class="form-check">
+                    <label class="switch">
+                        <input type="checkbox" name="remember_password">
+                        <span class="slider round"></span>
+				    </label>
+				    <label class="form-check-label" for="exampleCheck1">记住密码</label>
+                    <label class="forgot-password"><a href="/accounts/forget/">忘记密码?</a></label>
+				</div>
+                <br>
+				<button type="submit" class="btn btn-lg btn-block btn-success">登录</button>
+            </form>
+		 <!-- End Loging form -->
+            
+        </div>
+	</div>
+	</div>
+</div>
+
+<br><br><br><br><br>
+<hr>
+<script>
+    {% if messages %}
+        {% for msg in messages %}
+            alert('{{ msg.message }}')
+        {% endfor %}
+    {% endif %}
+</script>
+{% endblock %}

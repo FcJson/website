@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}招领{% endblock %}
+
+
+{% block css %}
+    <style type="text/css">
+    .list-container {
+        display: grid;
+        grid-gap: 20px;
+        grid-template-columns: repeat(5, 1fr);
+    }
+    </style>
+{% endblock %}
+
+{% block nav %}
+    {% include 'nav.html' %}
+{% endblock %}
+
+{% block content %}
+<hr>
+
+<div>
+<div style="text-align: center">
+    <a style="color: blue;text-decoration: underline blue" href="/upload/">发布招领启事</a>
+</div>
+<br>
+
+<div style="text-align: center;width: 80%">
+<form action="/found/" method="post">
+    {% csrf_token %}
+    {% include 'filter.html' %}
+</form>
+</div>
+</div>
+
+<hr>
+
+<div style="text-align: center">
+    <h3>招领启事列表</h3>
+</div>
+<hr>
+
+<div class="container" style="width: 80%">
+<div class="justify-content-center">
+    <div class="list-container">
+        {% if objects %}
+            {% for object in objects %}
+                <div class="footer site-footer">
+                    <div style="text-align: center; color: red">{{ object.city }}-招领启事</div>
+                    <hr>
+                    {% if object.image %}
+                        &nbsp&nbsp<img src="/media/{{ object.image }}">
+                    {% endif %}
+                    <p>&nbsp&nbsp 详细信息: {{ object.detail }}<br>&nbsp&nbsp 电话号码: {{ object.user.phone_number }}<br>&nbsp&nbsp {{ object.date }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div><p>很抱歉,没有符合条件的记录</p></div>
+        {% endif %}
+    </div>
+</div>
+</div>
+
+<hr>
+
+<script>
+    {% if messages %}
+        {% for msg in messages %}
+            alert('{{ msg.message }}')
+        {% endfor %}
+    {% endif %}
+</script>
+
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% block title %}发布寻物 | 招领启事{% endblock %}
+
+{% block nav %}
+    {% include 'nav.html' %}
+{% endblock %}
+
+{% block content %}
+
+<div style="text-align: center">
+    <h2>发布寻物 | 招领启事</h2>
+</div>
+<br>
+
+<div class="container">
+    <div class="justify-content-center">
+    <div>
+        <form action="/upload/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">事务类型:</div>
+                    <div class="col">
+                        <input id="radio1" checked type="radio" name="lost" value="True">
+                        <label for="radio1">发布寻物启事</label>
+                    </div>
+                    <div class="col">
+                        <input id="radio2" type="radio" name="lost" value="False">
+                        <label for="radio2">发布招领启事</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">物品类别:</div>
+                    <div class="col">
+                        <select name="category">
+                            {% if categories %}
+                                {% for category in categories %}
+                                    <option value="{{ category }}">{{ category }}</option>
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div class="col">{{ errors.category }}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">日期:</div>
+                    <div class="col">
+                        <input name="date" type="date">
+                    </div>
+                    <div class="col">{{ errors.date }}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">省份:</div>
+                    <div class="col">
+                        <select name="province" id="province">
+                            {% if provinces %}
+                                {% for province in provinces %}
+                                    <option value="{{ province }}">{{ province }}</option>
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div class="col">{{ errors.province }}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">城市:</div>
+                    <div class="col">
+                        <select name="city" id="city">
+                        </select>
+                    </div>
+                    <div class="col">{{ errors.city }}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">图片:</div>
+                    <div class="col">
+                        <input type="file" name="image">
+                    </div>
+                    <div class="col">{{ errors.image }}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">详细信息:</div>
+                    <div class="col">
+                        <textarea name="detail" cols="40" rows="5" maxlength="100"></textarea>
+                    </div>
+                    <div class="col">{{ errors.detail }}</div>
+                </div>
+            </div>
+            <div style="text-align: center">
+                <button type="submit" style="width: 40%" class="btn btn-lg btn-block btn-success">发布</button>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>
+
+<hr>
+
+<script src="/static/laf/js/jquery.min.js"></script>
+<!--实现省市联动-->
+    <script>
+        $('#province').change(function(){
+            var province = $("#province").find("option:selected").text();
+            $('#city').empty();
+            $.ajax({
+                url: "/province/city/",
+                type: "post",
+                async: true,
+                "Content-Type": "application/json",
+                headers: {'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()},
+                data: {'province': province.toString()},
+                success: function (response) {
+                    $.each(response, function (key, value) {
+                        $("#city").append("<option value="+value+">"+value+"</option>");
+                        console.log(value);
+                    })
+                }
+            });
+        });
+    </script>
+
+
+{% endblock %}

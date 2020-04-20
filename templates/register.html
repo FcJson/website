@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block title %}注册{% endblock %}
+
+
+{% block css %}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="/static/laf/css/login_bootstrap.min.css">
+
+<!-- Loding font -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,700" rel="stylesheet">
+
+<!-- Custom Styles -->
+<link rel="stylesheet" type="text/css" href="/static/laf/css/login_styles.css">
+{% endblock %}
+
+{% block nav %}
+    {% include 'nav.html' %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container" id="login">
+	<div class="row justify-content-center">
+	<div class="col-lg-8">
+	    <div class="login">
+
+            <h2>注册</h2>
+            <!-- Registering form -->
+            <form action="/accounts/register/" method="post">
+                {% csrf_token %}
+				<div class="form-group">
+                    <input type="text" class="form-control" name="username" placeholder="用户名">
+                    <p class="errors">{{ errors.username }}</p>
+				</div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="gender" placeholder="性别">
+                    <p class="errors">{{ errors.gender }}</p>
+				</div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="age" placeholder="年龄">
+                    <p class="errors">{{ errors.age }}</p>
+				</div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="phone_number" placeholder="电话号码">
+                    <p class="errors">{{ errors.phone_number }}</p>
+				</div>
+                <div class="form-group">
+                    <input type="email" class="form-control" name="email" placeholder="邮箱">
+                    <p class="errors">{{ errors.email }}</p>
+				</div>
+				<div class="form-group">
+				  <input type="password" class="form-control" name="password" placeholder="密码">
+                    <p class="errors">{{ errors.password }}</p>
+				</div>
+                <div class="form-group">
+				  <input type="password" class="form-control" name="re_password" placeholder="确认密码">
+                    <p class="errors">{{ errors.re_password }}</p>
+				</div>
+                <div class="row form-group">
+                    <div class="col">
+                        <input type="text" id="id_reg_captcha_1" name="captcha_1" class="form-control form-control-captcha fl" placeholder="验证码">
+                        <p class="errors">{{ errors.captcha }}</p>
+                    </div>
+                    <div class="col">
+                        <img src="{{ image_url }}" id="captcha" class="captcha" alt="captcha">
+                    </div>
+                </div>
+                <input id="id_reg_captcha_0" name="captcha_0" type="hidden" value="{{ hashkey }}">
+
+                <div class="form-check">
+                    <label class="switch">
+                    <input type="checkbox" name="agree_protocol">
+                    <span class="slider round"></span>
+				    </label>
+				    <label class="form-check-label" for="exampleCheck1">我同意遵守用户协议</label>
+                    <p class="errors">{{ errors.agree_protocol }}</p>
+				</div>
+				<button id="submit" type="submit" class="btn btn-lg btn-block btn-success">注册</button>
+            </form>
+		 <!-- End Registering form -->
+
+        </div>
+	</div>
+	</div>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<script src="/static/laf/js/jquery.min.js"></script>
+<!--刷新验证码-->
+    <script>
+        $('#captcha').click(function(){
+            $.getJSON("/captcha/refresh/", function(json) {
+                $("#id_reg_captcha_0").attr("value", json['hashkey']);
+                $("#captcha").attr("src", json['image_url']);
+            });
+        });
+    </script>
+
+{% endblock %}
