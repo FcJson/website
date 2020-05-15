@@ -6,6 +6,7 @@ from laf.forms import RegisterForm, LoginForm, ChangeForm, ForgetForm
 from django.core.mail import send_mail
 from website import settings
 from django.http import JsonResponse
+from django.views.decorators.cache import cache_page
 from captcha.models import CaptchaStore
 from captcha.helpers import captcha_image_url
 import random
@@ -19,6 +20,7 @@ categories = ['---请选择---', '钱包', '钥匙', '宠物', '首饰', '体育
 
 
 # 主页视图
+@cache_page(60 * 15)
 def home(request):
     return render(request, 'home.html')
 
@@ -226,6 +228,7 @@ def register(request):
 
 
 # 登录视图
+@cache_page(60 * 15)
 def login(request):
     # 不允许重复登录
     if request.session.get('is_login', False):
